@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Platform } from "react-native";
 import React, { forwardRef, useCallback, useMemo, useState } from "react";
 import {
   BottomSheetBackdrop,
@@ -75,7 +75,7 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
         {/* Location and Time */}
         <View className=" space-y-2 ">
           <Text className="text-lg font-bold mx-2">Your Location</Text>
-          <Link asChild href={"./"}>
+          <Link asChild href={"./(modal)/LocationSearch"} replace={Platform.OS === "android" ? true : false}>
             <TouchableOpacity className="flex-row items-center justify-between py-3 border-y border-gray-300 bg-white">
               <View className="flex-row items-center space-x-2 ml-2">
                 <Ionicons

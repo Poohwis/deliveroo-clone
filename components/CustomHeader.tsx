@@ -21,7 +21,7 @@ const SearchBar = () => {
         </View>
       </View>
       <View>
-        <Link href={"/"} asChild>
+        <Link href={"/(modal)/Filter"} asChild>
           <TouchableOpacity className="p-[10px] rounded-full bg-lightgray">
             <Ionicons name="options-outline" size={20} color={Colors.primary} />
           </TouchableOpacity>
@@ -40,14 +40,14 @@ const CustomHeader = () => {
     <SafeAreaView className="flex-1 bg-white">
       <BottomSheet ref={bottomSheetRef}/>
       <View className="flex-row h-[65px] bg-white gap-[20px] items-center justify-between px-[20px]">
-        <TouchableOpacity onPress={openModal}>
+        <TouchableOpacity >
           <Image
             source={require("@/assets/images/temp_profile_pic.png")}
             className="object-cover h-[30px] w-[30px] rounded-full"
           />
         </TouchableOpacity>
 
-        <TouchableOpacity className="flex-1">
+        <TouchableOpacity className="flex-1" onPress={openModal}>
           <Text className="text-sm text-medium">Delivery · Now</Text>
           <View className="flex-row items-center">
             <Text className="text-lg font-bold">Bangkok</Text>
