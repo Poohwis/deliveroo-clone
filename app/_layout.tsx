@@ -4,7 +4,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import LocationSearch from "./(modal)/LocationSearch";
+import { StatusBar } from "expo-status-bar";
 
 export const unstable_settings = {
   initialRouteName: "index",
@@ -27,9 +27,9 @@ export default function RootLayoutNav() {
             presentation: "modal",
             gestureEnabled: true,
             headerTitle: "Filters",
-            headerStyle: { backgroundColor: 'white' },
-            headerTitleStyle: {fontSize: 16},
-            headerTitleAlign: "center", 
+            headerStyle: { backgroundColor: "white" },
+            headerTitleStyle: { fontSize: 16 },
+            headerTitleAlign: "center",
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => {
@@ -51,9 +51,9 @@ export default function RootLayoutNav() {
             presentation: "fullScreenModal",
             gestureEnabled: true,
             headerTitle: "Search location",
-            headerStyle: { backgroundColor: 'white' },
-            headerTitleStyle: {fontSize: 16},
-            headerTitleAlign: "center", 
+            headerStyle: { backgroundColor: "white" },
+            headerTitleStyle: { fontSize: 16 },
+            headerTitleAlign: "center",
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => {

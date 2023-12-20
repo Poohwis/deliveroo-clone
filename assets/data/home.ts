@@ -28,11 +28,12 @@ export const categories = [
 export const restaurants = [
   {
     name: 'Vapiano',
+    id: '1',
     rating: '4.5 Excellent',
     ratings: '(500+)',
     distance: '0.7 miles away',
     img: require('@/assets/data/r1.jpeg'),
-    tags: ['Italian', 'Pizza', 'Pasta', 'Salads'],
+    tags: ['Italian', 'Pizza', 'Pasta', 'Salads', 'Vegetarian', 'Alcohol', 'Wine', 'Vegan Friendly',],
     duration: '35 - 45',
   },
   {
