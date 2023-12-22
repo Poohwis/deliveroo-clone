@@ -2,7 +2,7 @@ import { Stack, useNavigation } from "expo-router";
 import CustomHeader from "@/components/CustomHeader";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import Colors from "@/constants/Colors";
-import { TouchableOpacity } from "react-native";
+import { Platform, TouchableOpacity, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
@@ -69,6 +69,25 @@ export default function RootLayoutNav() {
             ),
           }}
         />
+        <Stack.Screen
+        name="(modal)/Dish"
+        options={{
+          presentation: 'modal',
+          headerTransparent: true,
+          headerTitle: '',
+          // headerShadowVisible: false,
+          headerLeft: ()=> (
+            <TouchableOpacity
+            className="p-2 bg-white rounded-full"
+            onPress={()=>{navigation.goBack()}}>
+                <Ionicons
+                  name={Platform.OS === 'android' ? "arrow-back" : "close-outline"}
+                  size={20}
+                  color={Colors.primary}
+                />
+            </TouchableOpacity>
+          )
+        }}/>
       </Stack>
     </BottomSheetModalProvider>
   );

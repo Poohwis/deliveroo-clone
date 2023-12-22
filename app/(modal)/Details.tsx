@@ -7,8 +7,9 @@ import {
   SectionList,
   ListRenderItem,
   Image,
+  Button,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { Link, useLocalSearchParams, useNavigation } from "expo-router";
 import { restaurant } from "@/assets/data/restaurant";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,16 +22,18 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 const IMG_HEIGHT = 300;
 const Details = () => {
-  const navigation = useNavigation();
   const DATA = restaurant.food.map((item, index) => ({
     title: item.category,
     data: item.meals,
     index,
   }));
+
+  const navigation = useNavigation();
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   const scrollOffset = useScrollViewOffset(scrollRef);
@@ -73,7 +76,7 @@ const Details = () => {
       header: () => (
         <>
           <View className=" w-full h-[85px] absolute top-0 left-0 flex-row justify-between items-end z-20">
-            <View className="m-2">
+            <View className="ml-4 mb-2">
               <TouchableOpacity
                 onPress={() => navigation.goBack()}
                 className="bg-white rounded-full p-2 "
@@ -81,7 +84,7 @@ const Details = () => {
                 <Ionicons name="arrow-back" size={20} color={Colors.primary} />
               </TouchableOpacity>
             </View>
-            <View className="flex-row  space-x-2 m-2">
+            <View className="flex-row  space-x-2 mb-2 mr-4">
               <TouchableOpacity className="bg-white rounded-full p-2">
                 <Ionicons
                   name="share-outline"
@@ -111,18 +114,21 @@ const Details = () => {
 
   const renderItem: ListRenderItem<any> = ({ item, index }) => {
     return (
-      <Link href={"./"} asChild>
-        <TouchableOpacity className="flex-row justify-between bg-white">
-          <View className="flex-1 flex-col ml-4 py-2 ">
+      <Link href={{pathname:"/(modal)/Dish",params: {id: item.id}}} asChild>
+        <TouchableOpacity
+          key={index}
+          className="flex-row justify-between bg-white "
+        >
+          <View className="flex-1 flex-col ml-4 py-2">
             <View className="justify-start flex-1">
               <Text className="font-bold text-[16px]">{item.name}</Text>
               <Text className="text-medium">{item.info}</Text>
             </View>
             <View className="justify-end  flex-1">
-              <Text className="text-medium pt-1 ">£{item.price}</Text>
+              <Text className="text-gray-600 pt-1 ">£{item.price}</Text>
             </View>
           </View>
-          <View className="flex-1 items-end mr-4 justify-center py-2">
+          <View className="flex-1 items-end mr-4 justify-center py-2 my-2">
             <Image
               source={item.img}
               className="w-[100px] h-[100px] rounded-sm "
@@ -134,14 +140,14 @@ const Details = () => {
   };
 
   return (
-    <View className="flex-1 bg-lightgray">
+    <SafeAreaView className="flex-1 bg-lightgray">
       <StatusBar style="dark" />
       <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
         <Animated.Image
           source={restaurant.img}
           style={[styles.image, imageAnimatedStyle]}
         />
-        <View className="bg-lightgray">
+        <View className="bg-lightgray" >
           <View className="mx-4">
             <Text className="text-[24px] font-bold py-2 mt-2">
               {restaurant.name}
@@ -171,7 +177,8 @@ const Details = () => {
             renderItem={renderItem}
             renderSectionHeader={({ section: { title, index } }) => (
               <Text
-                key={index}
+              // onLayout={(event)=>console.log(event.nativeEvent.layout)}
+                key={`${title}-${index}`}
                 className="text-[18px] font-bold mt-8 mb-4 ml-4"
               >
                 {title}
@@ -180,7 +187,7 @@ const Details = () => {
           />
         </View>
       </Animated.ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
